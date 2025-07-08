@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations for the terminal */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-typing {
+  animation: typing 2s steps(40, end);
+}
+
+.animate-cursor {
+  animation: blink 1s infinite;
+}
+
+/* Terminal glow effect */
+.terminal-glow {
+  box-shadow: 
+    0 0 20px rgba(34, 197, 94, 0.1),
+    inset 0 0 20px rgba(34, 197, 94, 0.05);
+}
+
+/* Hover effects */
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Scrollbar styling */
+.terminal-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: rgb(17, 24, 39);
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: rgb(75, 85, 99);
+  border-radius: 4px;
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(107, 114, 128);
+}
+
+/* Text selection styling */
+::selection {
+  background-color: rgba(34, 197, 94, 0.3);
+  color: white;
+}
+
+/* Custom utility classes */
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .terminal-mobile {
+    font-size: 14px;
+    padding: 12px;
+  }
+  
+  .mobile-hide {
+    display: none;
+  }
+}
