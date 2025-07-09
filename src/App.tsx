@@ -1088,46 +1088,249 @@ visitors: {
     </div>
   )
 },
-    contact: {
-      name: 'contact',
-      description: 'Get in touch with MUCYO',
-      execute: () => (
-        <div className="space-y-4 animate-fade-in">
-          <div className="text-green-400 font-bold text-lg flex items-center gap-2">
-            <Mail className="w-5 h-5" />
-            Contact Information
+contact: {
+  name: 'contact',
+  description: 'Get in touch with MUCYO',
+  execute: () => (
+    <div className="space-y-4 animate-fade-in">
+      <div className="text-green-400 font-bold text-lg flex items-center gap-2">
+        <Mail className="w-5 h-5" />
+        Contact Information
+      </div>
+      
+      <div className="bg-gray-800 rounded-lg p-4 space-y-4">
+        {/* Email with copy functionality */}
+        <div className="flex items-center space-x-3 hover:bg-gray-700 p-3 rounded-lg transition-all duration-300 group">
+          <Mail className="w-5 h-5 text-cyan-400 group-hover:animate-pulse" />
+          <span className="text-gray-300 flex-1">mucyoprinc12@gmail.com</span>
+          <button 
+            onClick={() => {
+              navigator.clipboard.writeText('mucyoprinc12@gmail.com');
+              // You can add a toast notification here
+              alert('Email copied to clipboard! 📧');
+            }}
+            className="text-cyan-400 text-xs hover:text-cyan-300 bg-cyan-400 bg-opacity-10 px-3 py-1 rounded-full hover:bg-opacity-20 transition-all"
+          >
+            Copy
+          </button>
+          <a 
+            href="mailto:mucyoprinc12@gmail.com?subject=Portfolio Contact&body=Hi MUCYO, I found your portfolio impressive and would like to connect!"
+            className="text-blue-400 text-xs hover:text-blue-300 bg-blue-400 bg-opacity-10 px-3 py-1 rounded-full hover:bg-opacity-20 transition-all"
+          >
+            Email
+          </a>
+        </div>
+
+        {/* LinkedIn with actual link */}
+        <div className="flex items-center space-x-3 hover:bg-gray-700 p-3 rounded-lg transition-all duration-300 group">
+          <Linkedin className="w-5 h-5 text-blue-400 group-hover:animate-bounce" />
+          <span className="text-gray-300 flex-1">LinkedIn Professional Profile</span>
+          <a 
+            href="https://www.linkedin.com/in/mucyo-prince-29321421b"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+            title="Visit LinkedIn Profile"
+          >
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* GitHub with actual link */}
+        <div className="flex items-center space-x-3 hover:bg-gray-700 p-3 rounded-lg transition-all duration-300 group">
+          <Github className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:animate-spin" />
+          <span className="text-gray-300 flex-1">GitHub Code Repository</span>
+          <a 
+            href="https://github.com/Prince-Kid"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            title="View GitHub Profile"
+          >
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-center space-x-3 hover:bg-gray-700 p-3 rounded-lg transition-all duration-300 group">
+          <MapPin className="w-5 h-5 text-red-400 group-hover:animate-pulse" />
+          <span className="text-gray-300 flex-1">Kigali, Rwanda 🇷🇼</span>
+          <span className="text-green-400 text-xs bg-green-400 bg-opacity-10 px-3 py-1 rounded-full">
+            Available Globally
+          </span>
+        </div>
+
+        {/* Phone/WhatsApp (if you want to add) */}
+        <div className="flex items-center space-x-3 hover:bg-gray-700 p-3 rounded-lg transition-all duration-300 group">
+          <div className="w-5 h-5 text-green-400 flex items-center justify-center group-hover:animate-bounce">📱</div>
+          <span className="text-gray-300 flex-1">WhatsApp Available</span>
+          <button 
+            onClick={() => {
+              // You can add your WhatsApp number here
+              window.open('https://wa.me/250783154587?text=Hi MUCYO, I found your portfolio impressive!', '_blank');
+            }}
+            className="text-green-400 text-xs hover:text-green-300 bg-green-400 bg-opacity-10 px-3 py-1 rounded-full hover:bg-opacity-20 transition-all"
+          >
+            Message
+          </button>
+        </div>
+      </div>
+
+      {/* Quick Actions Panel */}
+      <div className="bg-gray-800 rounded-lg p-4">
+        <div className="text-cyan-400 font-semibold mb-3 flex items-center gap-2">
+          ⚡ Quick Actions
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <button 
+            onClick={() => {
+              const subject = 'Job Opportunity - Full Stack Developer';
+              const body = `Hi MUCYO,
+
+I came across your impressive portfolio terminal and would like to discuss a potential opportunity.
+
+Your expertise in:
+- PERN/MERN Stack Development
+- Leadership (Minister of ICT)
+- Project Portfolio (7+ real-world applications)
+
+Would be valuable for our team.
+
+Let's schedule a call to discuss further.
+
+Best regards,`;
+              window.open(`mailto:mucyoprinc12@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            }}
+            className="bg-blue-500 bg-opacity-20 hover:bg-opacity-30 text-blue-400 hover:text-blue-300 p-3 rounded-lg transition-all duration-300 text-sm font-semibold border border-blue-500 border-opacity-30"
+          >
+            💼 Hire Me Now
+          </button>
+          <button 
+            onClick={() => {
+              const subject = 'Project Collaboration Inquiry';
+              const body = `Hi MUCYO,
+
+I have an exciting project opportunity that matches your skills:
+
+Project Type: [Brief Description]
+Tech Stack: React/Node.js/PostgreSQL
+Timeline: [Your Timeline]
+Budget: [Your Budget]
+
+Your portfolio shows excellent work in similar projects. Would you be interested in collaborating?
+
+Looking forward to hearing from you!`;
+              window.open(`mailto:mucyoprinc12@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            }}
+            className="bg-green-500 bg-opacity-20 hover:bg-opacity-30 text-green-400 hover:text-green-300 p-3 rounded-lg transition-all duration-300 text-sm font-semibold border border-green-500 border-opacity-30"
+          >
+            🚀 Project Inquiry
+          </button>
+          <button 
+            onClick={() => {
+              window.open('https://calendly.com/mucyoprinc12', '_blank'); // Replace with your actual Calendly link
+            }}
+            className="bg-purple-500 bg-opacity-20 hover:bg-opacity-30 text-purple-400 hover:text-purple-300 p-3 rounded-lg transition-all duration-300 text-sm font-semibold border border-purple-500 border-opacity-30"
+          >
+            📅 Schedule Meeting
+          </button>
+          <button 
+            onClick={() => {
+              const shareText = `Check out MUCYO Prince's incredible terminal portfolio! 🚀\n\nFull-stack developer from Rwanda with amazing projects:\n- E-commerce platforms\n- Management systems\n- Modern web applications\n\nInteractive terminal interface: https://mucyoprince.vercel.app/`;
+              if (navigator.share) {
+                navigator.share({
+                  title: 'MUCYO Prince - Software Developer Portfolio',
+                  text: shareText,
+                  url: window.location.href
+                });
+              } else {
+                navigator.clipboard.writeText(shareText + '\n' + window.location.href);
+                alert('Portfolio link copied to clipboard! 🔗');
+              }
+            }}
+            className="bg-orange-500 bg-opacity-20 hover:bg-opacity-30 text-orange-400 hover:text-orange-300 p-3 rounded-lg transition-all duration-300 text-sm font-semibold border border-orange-500 border-opacity-30"
+          >
+            🔗 Share Portfolio
+          </button>
+        </div>
+      </div>
+
+      {/* Response Time & Availability */}
+     <div className="bg-gray-800 rounded-lg p-4">
+  <div className="text-cyan-400 font-semibold mb-3">⏰ Response Times & Availability</div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">📧 Email Response:</span>
+        <span className="text-green-400 font-semibold">&lt; 4 hours</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">💼 LinkedIn Messages:</span>
+        <span className="text-blue-400 font-semibold">&lt; 2 hours</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">📱 WhatsApp/Calls:</span>
+        <span className="text-green-400 font-semibold">Same day</span>
+      </div>
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">🕐 Working Hours:</span>
+        <span className="text-cyan-400">8 AM - 10 PM EAT</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">🌍 Time Zone:</span>
+        <span className="text-purple-400">GMT+3 (EAT)</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-300">📅 Availability:</span>
+        <span className="text-green-400 animate-pulse">● Available Now</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+      {/* Professional Stats */}
+      <div className="bg-gray-800 rounded-lg p-4">
+        <div className="text-cyan-400 font-semibold mb-3">📊 Professional Highlights</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+          <div className="bg-gray-700 rounded-lg p-3">
+            <div className="text-green-400 text-xl font-bold">24h</div>
+            <div className="text-gray-300 text-xs">Avg Response</div>
           </div>
-          <div className="bg-gray-800 rounded-lg p-4 space-y-4">
-            <div className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded transition-colors">
-              <Mail className="w-5 h-5 text-cyan-400" />
-              <span className="text-gray-300">mucyoprinc12@gmail.com</span>
-              <button className="text-cyan-400 text-xs hover:text-cyan-300">Copy</button>
-            </div>
-            <div className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded transition-colors">
-              <Linkedin className="w-5 h-5 text-blue-400" />
-              <span className="text-gray-300">LinkedIn Profile</span>
-              <ExternalLink className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded transition-colors">
-              <Github className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-300">GitHub Profile</span>
-              <ExternalLink className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex items-center space-x-3 hover:bg-gray-700 p-2 rounded transition-colors">
-              <MapPin className="w-5 h-5 text-red-400" />
-              <span className="text-gray-300">Kigali, Rwanda</span>
-            </div>
+          <div className="bg-gray-700 rounded-lg p-3">
+            <div className="text-blue-400 text-xl font-bold">100%</div>
+            <div className="text-gray-300 text-xs">Client Satisfaction</div>
           </div>
-          <div className="text-gray-400 text-sm border-t border-gray-700 pt-3">
-            🚀 <strong>Ready for new opportunities!</strong> Feel free to reach out for collaboration, 
-            project discussions, or just to connect!
+          <div className="bg-gray-700 rounded-lg p-3">
+            <div className="text-purple-400 text-xl font-bold">15+</div>
+            <div className="text-gray-300 text-xs">Projects Delivered</div>
           </div>
-          <div className="text-cyan-400 text-sm">
-            💬 <strong>Languages:</strong> English, Kinyarwanda
+          <div className="bg-gray-700 rounded-lg p-3">
+            <div className="text-yellow-400 text-xl font-bold">2+</div>
+            <div className="text-gray-300 text-xs">Years Experience</div>
           </div>
         </div>
-      )
-    },
+      </div>
+
+      {/* Call to Action */}
+      <div className="text-center bg-gradient-to-r from-blue-500 to-purple-500 bg-opacity-10 border border-blue-500 border-opacity-30 rounded-lg p-4">
+        <div className="text-gray-300 text-sm mb-2">
+          🚀 <strong>Ready for new opportunities!</strong> Whether it's a full-time position, freelance project, 
+          or just a friendly chat about technology, I'm always excited to connect with fellow developers and potential collaborators.
+        </div>
+        <div className="text-cyan-400 text-sm">
+          💬 <strong>Languages:</strong> English (Fluent), Kinyarwanda (Native) • 🌍 <strong>Remote Work:</strong> Available Worldwide
+        </div>
+      </div>
+
+      {/* Easter Egg */}
+      <div className="text-center text-gray-500 text-xs">
+        💡 <em>Pro tip: Try the `easter` command for a surprise! Or type `quote` for daily motivation.</em>
+      </div>
+    </div>
+  )
+},
     easter: {
       name: 'easter',
       description: 'Hidden surprise command',
