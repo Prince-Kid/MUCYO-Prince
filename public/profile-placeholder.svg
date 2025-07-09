@@ -1,0 +1,41 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6b7280;stop-opacity:1" />
+    </linearGradient>
+    <filter id="grayscale">
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="200" fill="url(#bgGradient)" filter="url(#grayscale)"/>
+  
+  <!-- Person silhouette -->
+  <g transform="translate(200,200)">
+    <!-- Head -->
+    <circle cx="0" cy="-40" r="45" fill="#ffffff" opacity="0.8"/>
+    
+    <!-- Body -->
+    <ellipse cx="0" cy="60" rx="75" ry="90" fill="#ffffff" opacity="0.8"/>
+    
+    <!-- Professional touch - suit collar -->
+    <path d="M -30 10 L -45 40 L -20 40 L 0 25 L 20 40 L 45 40 L 30 10 Z" 
+          fill="#e5e7eb" opacity="0.9"/>
+    
+    <!-- Tie -->
+    <path d="M 0 25 L -8 35 L -6 70 L 0 75 L 6 70 L 8 35 Z" 
+          fill="#d1d5db" opacity="0.8"/>
+  </g>
+  
+  <!-- Text overlay -->
+  <text x="200" y="350" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="24" font-weight="bold" fill="#ffffff" opacity="0.9">
+    MUCYO Prince
+  </text>
+  <text x="200" y="375" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="16" fill="#e5e7eb" opacity="0.8">
+    Software Developer
+  </text>
+</svg>
