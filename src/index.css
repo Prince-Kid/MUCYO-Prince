@@ -70,11 +70,8 @@
 }
 
 .terminal-input {
-  caret-color: #3ddc84;
-}
-
-.terminal-input:disabled {
   caret-color: transparent;
+  color: transparent;
 }
 
 .terminal-scroll {
@@ -103,15 +100,4 @@
 .terminal-body {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-}
-
-.identity-card {
-  transition: transform 0.35s ease;
-  transform-style: preserve-3d;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .identity-card:hover {
-    transform: perspective(900px) rotateX(1.5deg) rotateY(-2deg);
-  }
 }

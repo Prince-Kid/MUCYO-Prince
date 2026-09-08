@@ -15,7 +15,7 @@ interface IdentityCardProps {
 export function IdentityCard({ onRunCommand }: IdentityCardProps) {
   return (
     <aside className="flex h-full min-h-0 flex-col">
-      <div className="identity-card flex h-auto flex-col rounded-md border border-border bg-surface p-5 md:p-6 lg:h-full">
+      <div className="flex h-auto flex-col rounded-md border border-border bg-surface p-5 md:p-6 lg:h-full">
         <div className="mx-auto w-full max-w-[200px] overflow-hidden rounded-md border border-border md:max-w-[220px]">
           <img
             src={profile.imageSrc}

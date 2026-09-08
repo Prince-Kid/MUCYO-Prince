@@ -1,5 +1,6 @@
 import { TerminalOutput } from './TerminalOutput';
 import { CommandShortcuts } from './CommandShortcuts';
+import { TerminalPromptInput } from './TerminalPromptInput';
 import type { useTerminal } from '../../hooks/useTerminal';
 
 type TerminalState = ReturnType<typeof useTerminal>;
@@ -60,10 +61,9 @@ export function Terminal(props: TerminalState) {
         </div>
       </div>
 
-      {/* VS Bot–style docked input at bottom */}
       <div className="shrink-0 border-t border-border bg-surface/95 backdrop-blur-sm">
         <div className="space-y-2 px-3 py-3 md:px-4" onClick={focusInput}>
-          <div className="flex flex-wrap items-center gap-2 rounded-sm border border-border bg-bg px-3 py-2 font-mono text-sm">
+          <div className="flex items-center gap-2 rounded-sm border border-border bg-bg px-3 py-2 font-mono text-sm">
             <span className="text-accent shrink-0">{prompt}</span>
             {showBootTyping ? (
               <span className="text-primary">
@@ -71,25 +71,14 @@ export function Terminal(props: TerminalState) {
                 <span className="terminal-cursor ml-0.5 inline-block h-4 w-2 translate-y-0.5 bg-accent align-middle" />
               </span>
             ) : (
-              <>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={currentInput}
-                  disabled={isBusy || !bootComplete}
-                  onChange={(e) => setCurrentInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  autoComplete="off"
-                  spellCheck={false}
-                  aria-label="Terminal command input"
-                  aria-autocomplete="list"
-                  placeholder={isBusy ? 'running…' : 'type a command'}
-                  className="terminal-input min-w-[12ch] flex-1 bg-transparent font-mono text-sm text-primary outline-none placeholder:text-muted/50 disabled:cursor-not-allowed"
-                />
-                {!isBusy && bootComplete && currentInput.length === 0 && (
-                  <span className="terminal-cursor pointer-events-none h-4 w-2 bg-accent" aria-hidden />
-                )}
-              </>
+              <TerminalPromptInput
+                value={currentInput}
+                disabled={isBusy || !bootComplete}
+                placeholder={isBusy ? 'running…' : 'type a command'}
+                inputRef={inputRef}
+                onChange={setCurrentInput}
+                onKeyDown={handleKeyDown}
+              />
             )}
           </div>
 

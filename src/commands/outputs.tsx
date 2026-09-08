@@ -94,20 +94,26 @@ export function HelpOutput({ entries }: { entries: Array<{ name: string; descrip
 }
 
 export function AboutOutput() {
+  const { about } = profile;
+
   return (
-    <div className="space-y-2 font-mono text-sm">
+    <div className="space-y-3 font-mono text-sm">
       <SectionTitle>about</SectionTitle>
-      <Line>
-        {profile.name} — {profile.title}
-      </Line>
-      <Line>
-        <Muted>Location:</Muted> {profile.location}
-      </Line>
-      <div className="space-y-1.5 pt-1">
-        {profile.about.map((p) => (
-          <Line key={p}>{p}</Line>
+      <Line>{about.greeting}</Line>
+      <Line>{about.intro}</Line>
+      <Line className={`pt-1 ${accent}`}>{about.backgroundTitle}</Line>
+      <OutputBlock className="space-y-1.5">
+        {about.background.map((item) => (
+          <Line key={item} className="pl-1">
+            <Muted>—</Muted> {item}
+          </Line>
         ))}
-      </div>
+      </OutputBlock>
+      {about.closing.map((p) => (
+        <Line key={p} className="pt-1">
+          {p}
+        </Line>
+      ))}
     </div>
   );
 }

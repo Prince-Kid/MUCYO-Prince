@@ -81,8 +81,30 @@ export function useTerminal() {
   }, []);
 
   const focusInput = useCallback(() => {
-    inputRef.current?.focus();
+    // Prefer focusing once enabled; ignore if still booting/busy
+    window.requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
   }, []);
+
+  // Refocus after stream completes is already handled; also keep focus when page is clicked
+  useEffect(() => {
+    if (!bootComplete || isBusy) return;
+
+    const keepFocus = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (
+        target.closest('a, button, input, textarea, select, [contenteditable="true"]')
+      ) {
+        return;
+      }
+      inputRef.current?.focus();
+    };
+
+    document.addEventListener('mousedown', keepFocus);
+    return () => document.removeEventListener('mousedown', keepFocus);
+  }, [bootComplete, isBusy]);
 
   const streamBlocks = useCallback(
     (
