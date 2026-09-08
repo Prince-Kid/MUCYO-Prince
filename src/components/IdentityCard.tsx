@@ -1,5 +1,6 @@
-import { MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { profile } from '../data/profile';
+import { contact } from '../data/contact';
 
 const FOCUS_COMMANDS: Record<(typeof profile.focusAreas)[number], string> = {
   Backend: 'skills',
@@ -52,6 +53,54 @@ export function IdentityCard({ onRunCommand }: IdentityCardProps) {
               {area}
             </button>
           ))}
+        </div>
+
+        <div className="mt-5 space-y-2 border-t border-border pt-4">
+          <p className="font-sans text-[11px] uppercase tracking-wide text-muted">Contact</p>
+          <ul className="space-y-2 font-sans text-xs">
+            <li>
+              <a
+                href={`mailto:${contact.email}`}
+                className="inline-flex max-w-full items-center gap-2 text-link transition-opacity hover:opacity-80"
+              >
+                <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                <span className="truncate">{contact.email}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex max-w-full items-center gap-2 text-link transition-opacity hover:opacity-80"
+              >
+                <Linkedin className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                <span className="truncate">{contact.linkedinLabel}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex max-w-full items-center gap-2 text-link transition-opacity hover:opacity-80"
+              >
+                <Github className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                <span className="truncate">{contact.githubLabel}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex max-w-full items-center gap-2 text-link transition-opacity hover:opacity-80"
+              >
+                <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                <span className="truncate">{contact.whatsappLabel}</span>
+              </a>
+            </li>
+          </ul>
         </div>
 
         <p className="mt-6 pt-2 font-sans text-sm italic text-muted lg:mt-auto lg:pt-6">

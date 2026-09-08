@@ -72,22 +72,26 @@ export function useTerminal() {
     [updateSuggestions]
   );
 
-  const scrollToBottom = useCallback((smooth = true) => {
+  /** Pin the latest command to the top of the terminal so long output reads downward. */
+  const scrollEntryToTop = useCallback((entryId: number) => {
+    // Wait for the new entry to mount, then pin it to the top of the viewport
     requestAnimationFrame(() => {
-      const el = terminalRef.current;
-      if (!el) return;
-      el.scrollTo({ top: el.scrollHeight, behavior: smooth ? 'smooth' : 'auto' });
+      requestAnimationFrame(() => {
+        const container = terminalRef.current;
+        const entry = container?.querySelector<HTMLElement>(`[data-entry-id="${entryId}"]`);
+        if (!container || !entry) return;
+        const top = entry.offsetTop - 8;
+        container.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+      });
     });
   }, []);
 
   const focusInput = useCallback(() => {
-    // Prefer focusing once enabled; ignore if still booting/busy
     window.requestAnimationFrame(() => {
       inputRef.current?.focus();
     });
   }, []);
 
-  // Refocus after stream completes is already handled; also keep focus when page is clicked
   useEffect(() => {
     if (!bootComplete || isBusy) return;
 
@@ -128,7 +132,7 @@ export function useTerminal() {
               : entry
           )
         );
-        scrollToBottom(false);
+        // Stay at the top of this command — do not chase the bottom while streaming
 
         if (visible < blocks.length) {
           const t = window.setTimeout(tick, LINE_DELAY_MS);
@@ -146,7 +150,7 @@ export function useTerminal() {
       const start = window.setTimeout(tick, START_DELAY_MS);
       streamTimers.current.push(start);
     },
-    [clearStreamTimers, scrollToBottom]
+    [clearStreamTimers]
   );
 
   const runCommand = useCallback(
@@ -184,7 +188,7 @@ export function useTerminal() {
           },
         ]);
         cmd?.sideEffect?.();
-        scrollToBottom();
+        requestAnimationFrame(() => scrollEntryToTop(id));
         return;
       }
 
@@ -200,16 +204,15 @@ export function useTerminal() {
           showPrompt,
         },
       ]);
-      scrollToBottom(false);
+      requestAnimationFrame(() => scrollEntryToTop(id));
 
       streamBlocks(id, blocks, () => {
         cmd?.sideEffect?.();
         setIsBusy(false);
-        scrollToBottom();
         focusInput();
       });
     },
-    [registry, scrollToBottom, focusInput, streamBlocks, clearStreamTimers]
+    [registry, focusInput, streamBlocks, clearStreamTimers, scrollEntryToTop]
   );
 
   useEffect(() => {
@@ -237,10 +240,6 @@ export function useTerminal() {
       window.clearInterval(interval);
     };
   }, [runCommand]);
-
-  useEffect(() => {
-    scrollToBottom(false);
-  }, [history, scrollToBottom]);
 
   const handleSubmit = useCallback(() => {
     if (isBusy || !bootComplete) return;

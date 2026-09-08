@@ -44,7 +44,7 @@ export function Terminal(props: TerminalState) {
       >
         <div className="space-y-5 pb-3 font-mono text-sm">
           {history.map((entry) => (
-            <div key={entry.id} className="space-y-2">
+            <div key={entry.id} data-entry-id={entry.id} className="space-y-2">
               {entry.showPrompt !== false && (
                 <div className="flex flex-wrap gap-2">
                   <span className="text-accent shrink-0">{prompt}</span>
