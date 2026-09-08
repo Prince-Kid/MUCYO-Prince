@@ -1,0 +1,28 @@
+export const profile = {
+  name: 'MUCYO Prince',
+  displayName: 'MUCYO PRINCE',
+  title: 'Full-Stack Software Engineer',
+  shortTitle: 'Software Engineer',
+  location: 'Kigali, Rwanda',
+  imageSrc: '/profile.png',
+  imageAlt: 'MUCYO Prince',
+  tagline: 'Building software for real-world products.',
+  quote: 'Make your passion your profession.',
+  available: true,
+  availabilityLabel: 'Available',
+  focusAreas: ['Backend', 'Web Apps', 'Full Stack', 'Product Engineering'] as const,
+  whoami: [
+    'MUCYO Prince — Full-Stack Software Engineer based in Kigali, Rwanda.',
+    'Andela Technical Leadership Program alumnus building production PERN/MERN systems.',
+    ,
+  ],
+  whoamiHint: 'Type help to explore experience, projects, skills, and more.',
+  about: [
+    'Full-Stack Software Engineer in Kigali, Rwanda, specializing in PERN and MERN stacks.',
+    'Andela Technical Leadership Program alumnus with hands-on product and API delivery.',
+    'Building production platforms at HireMe Afrika (hybrid) and Nextline Hub (remote).',
+    'Former Minister of ICT at Kigali Independent University (Gisenyi Campus).',
+    'Open to full-time roles, freelance engagements, and remote collaboration.',
+  ],
+  promptUser: 'mucyo@portfolio',
+} as const;

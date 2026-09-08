@@ -1,0 +1,14 @@
+export { profile } from './profile';
+export { contact, mailtoHref } from './contact';
+export { experience } from './experience';
+export { education } from './education';
+export { skills } from './skills';
+export { leadership } from './leadership';
+export { certifications } from './certifications';
+export { projects } from './projects';
+export type { ExperienceItem } from './experience';
+export type { EducationItem } from './education';
+export type { SkillCategory } from './skills';
+export type { LeadershipItem } from './leadership';
+export type { CertificationGroup } from './certifications';
+export type { Project } from './projects';

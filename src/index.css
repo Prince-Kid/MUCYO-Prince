@@ -2,8 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom animations for the terminal */
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-bg text-primary antialiased;
+  }
+
+  ::selection {
+    background: rgba(61, 220, 132, 0.25);
+  }
+}
+
 @keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes output-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -14,214 +42,76 @@
   }
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes scan-line {
-  0% {
-    top: 0;
-  }
+  51%,
   100% {
-    top: 100%;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.4);
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-100px) rotate(360deg);
     opacity: 0;
   }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.5s ease-out;
+  animation: fade-in 0.55s ease-out;
 }
 
-.animate-typing {
-  animation: typing 2s steps(40, end);
+.animate-output-in {
+  animation: output-in 0.85s ease-out;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-line-in {
+  animation: fade-in 0.28s ease-out;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
+.terminal-input {
+  caret-color: #3ddc84;
 }
 
-.animate-particle {
-  animation: particle-float 6s ease-in-out infinite;
+.terminal-input:disabled {
+  caret-color: transparent;
 }
 
-/* Terminal scrollbar styling */
+.terminal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #3a4654 transparent;
+}
+
 .terminal-scroll::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 .terminal-scroll::-webkit-scrollbar-track {
-  background: #1f2937;
-  border-radius: 4px;
+  background: transparent;
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: #2a3542;
   border-radius: 4px;
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: #3a4654;
 }
 
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.terminal-body {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Holographic text effect */
-.holographic {
-  background: linear-gradient(45deg, #12d8fa, #a0e9ff, #12d8fa, #a0e9ff);
-  background-size: 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 3s ease-in-out infinite;
+.identity-card {
+  transition: transform 0.35s ease;
+  transform-style: preserve-3d;
 }
 
-/* Neon glow effect */
-.neon-glow {
-  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
-}
-
-/* Modern card hover effect */
-.modern-card {
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.modern-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.animate-cursor {
-  animation: blink 1s infinite;
-}
-
-/* Terminal glow effect */
-.terminal-glow {
-  box-shadow: 
-    0 0 20px rgba(34, 197, 94, 0.1),
-    inset 0 0 20px rgba(34, 197, 94, 0.05);
-}
-
-/* Hover effects */
-.hover-glow:hover {
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-  transition: box-shadow 0.3s ease;
-}
-
-/* Scrollbar styling */
-.terminal-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.terminal-scroll::-webkit-scrollbar-track {
-  background: rgb(17, 24, 39);
-}
-
-.terminal-scroll::-webkit-scrollbar-thumb {
-  background: rgb(75, 85, 99);
-  border-radius: 4px;
-}
-
-.terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgb(107, 114, 128);
-}
-
-/* Text selection styling */
-::selection {
-  background-color: rgba(34, 197, 94, 0.3);
-  color: white;
-}
-
-/* Custom utility classes */
-.text-glow {
-  text-shadow: 0 0 10px currentColor;
-}
-
-.bg-grid {
-  background-image: 
-    linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .terminal-mobile {
-    font-size: 14px;
-    padding: 12px;
-  }
-  
-  .mobile-hide {
-    display: none;
+@media (hover: hover) and (pointer: fine) {
+  .identity-card:hover {
+    transform: perspective(900px) rotateX(1.5deg) rotateY(-2deg);
   }
 }

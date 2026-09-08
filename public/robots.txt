@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mucyoprince.vercel.app/sitemap.xml
