@@ -6,7 +6,7 @@ export const profile = {
   location: 'Kigali, Rwanda',
   imageSrc: '/profile.png',
   imageAlt: 'MUCYO Prince',
-  tagline: 'Building scalable, user-focused digital solutions.',
+ 
   quote: 'Make your passion your profession.',
   available: true,
   availabilityLabel: 'Available',

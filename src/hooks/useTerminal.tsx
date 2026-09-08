@@ -25,7 +25,14 @@ const START_DELAY_MS = 280;
 const WHOAMI_TYPE_MS = 95;
 const BOOT_PAUSE_MS = 450;
 
-export function useTerminal() {
+interface UseTerminalOptions {
+  onUserCommand?: () => void;
+}
+
+export function useTerminal(options: UseTerminalOptions = {}) {
+  const { onUserCommand } = options;
+  const onUserCommandRef = useRef(onUserCommand);
+  onUserCommandRef.current = onUserCommand;
   const registry = useRef(createCommandRegistry()).current;
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [currentInput, setCurrentInput] = useState('');
@@ -154,13 +161,21 @@ export function useTerminal() {
   );
 
   const runCommand = useCallback(
-    (rawInput: string, options?: { animated?: boolean; showPrompt?: boolean }) => {
+    (
+      rawInput: string,
+      cmdOptions?: { animated?: boolean; showPrompt?: boolean; isBoot?: boolean }
+    ) => {
       const { key, raw } = parseCommand(rawInput);
       if (!key) return;
 
-      const showPrompt = options?.showPrompt !== false;
-      const animated = options?.animated !== false;
+      const showPrompt = cmdOptions?.showPrompt !== false;
+      const animated = cmdOptions?.animated !== false;
+      const isBoot = cmdOptions?.isBoot === true;
       const id = ++idRef.current;
+
+      if (!isBoot) {
+        onUserCommandRef.current?.();
+      }
 
       if (key === 'clear') {
         clearStreamTimers();
@@ -229,7 +244,7 @@ export function useTerminal() {
         window.setTimeout(() => {
           if (cancelled) return;
           setTypedBootCommand('');
-          runCommand(command, { animated: true, showPrompt: true });
+          runCommand(command, { animated: true, showPrompt: true, isBoot: true });
           setBootComplete(true);
         }, BOOT_PAUSE_MS);
       }
